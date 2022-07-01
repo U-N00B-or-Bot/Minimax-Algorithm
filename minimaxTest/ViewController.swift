@@ -134,7 +134,7 @@ class ViewController: UIViewController {
         
         checkPressedButton()
         if notPressedButton.count > 0{
-            minimax(btn: initButton, currentPlayer: computer, isMain: true)
+            minimax(btn: nil, currentPlayer: computer, isMain: true)
             if win(){
                 for board in board {
                     board.isEnabled = false
@@ -161,7 +161,7 @@ class ViewController: UIViewController {
     }
     
     
-    func minimax(btn: MyButton, currentPlayer: String, isMain: Bool){
+    func minimax(btn: MyButton?, currentPlayer: String, isMain: Bool){
         
         
         
@@ -260,7 +260,8 @@ class ViewController: UIViewController {
         
         if currentPlayer == computer {
             let max = values.max() ?? 0
-            btn.score = max//values.max() ?? 0
+            if !isMain{
+                btn!.score = max}//values.max() ?? 0
             let btnIndex = values.firstIndex(of: max) ?? 0
             if isMain{
                 buttons[btnIndex].pressed = true
@@ -275,8 +276,10 @@ class ViewController: UIViewController {
             
             //print(values.max() ?? 0)
         } else {
-            btn.score = values.min() ?? 0
+            if !isMain{
+            btn!.score = values.min() ?? 0
             // print(values.min() ?? 0)
+            }
         }
         if isMain{
             
